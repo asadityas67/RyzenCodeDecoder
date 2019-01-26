@@ -1,0 +1,11 @@
+C:\Users\Aditya Sharma\source\repos\RyzenESdecode\RyzenESdecode\bin\Release\RyzenESdecode.exe.config
+C:\Users\Aditya Sharma\source\repos\RyzenESdecode\RyzenESdecode\bin\Release\RyzenESdecode.exe.manifest
+C:\Users\Aditya Sharma\source\repos\RyzenESdecode\RyzenESdecode\bin\Release\RyzenESdecode.application
+C:\Users\Aditya Sharma\source\repos\RyzenESdecode\RyzenESdecode\bin\Release\RyzenESdecode.exe
+C:\Users\Aditya Sharma\source\repos\RyzenESdecode\RyzenESdecode\bin\Release\RyzenESdecode.pdb
+C:\Users\Aditya Sharma\source\repos\RyzenESdecode\RyzenESdecode\obj\Release\RyzenESdecode.csprojAssemblyReference.cache
+C:\Users\Aditya Sharma\source\repos\RyzenESdecode\RyzenESdecode\obj\Release\RyzenESdecode.csproj.CoreCompileInputs.cache
+C:\Users\Aditya Sharma\source\repos\RyzenESdecode\RyzenESdecode\obj\Release\RyzenESdecode.exe.manifest
+C:\Users\Aditya Sharma\source\repos\RyzenESdecode\RyzenESdecode\obj\Release\RyzenESdecode.application
+C:\Users\Aditya Sharma\source\repos\RyzenESdecode\RyzenESdecode\obj\Release\RyzenESdecode.exe
+C:\Users\Aditya Sharma\source\repos\RyzenESdecode\RyzenESdecode\obj\Release\RyzenESdecode.pdb
