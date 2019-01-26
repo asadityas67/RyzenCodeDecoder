@@ -21,7 +21,7 @@ namespace RyzenESdecode
                 case '2': Console.WriteLine("Prototype Generation : Engineering sample 1"); break;
                 case 'Y': Console.WriteLine("Prototype Generation : Production Ryzen"); break;
                 case 'P': Console.WriteLine("Prototype Generation : Production EPYC"); break;
-                case 'Z': Console.WriteLine("Prototype Generation : Quantum satis or acceptable to reach desired results"); break;
+                case 'Z': Console.WriteLine("Prototype Generation : Qualification Sample"); break;
                 default: Console.WriteLine("Invalid");break;
             }
             Console.WriteLine("");
