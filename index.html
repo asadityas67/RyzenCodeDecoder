@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en-US">
   <head>
     <meta charset='utf-8'>
@@ -39,7 +39,11 @@
     <div class="container">
       <section id="main_content">
         <h1>Ryzen Decode</h1>
-		<p>Enter Code here (like 2S1404E2VJUG5_20/14_N), then click decode</p>
+		<p>Ryzen Code Decoder v0.1</p>
+		<p>Made in accordance with HOW TO DECODE AMD CODENAMES V5.0 BY MARVIN(Marvin@moepc.net)</p>
+		</p>Program Written By Aditya Sharma u/asadityas67 or asadityas67@gmail.com</p>
+		<p>For Zen Based CPUs only, may not cover all CPUs</p>
+		<p>Enter Code here then click decode</p>
 		<input type='text' id='data'/>
 		<input type='button' onclick='render(document.getElementById("data").value);' value="Decode"/>
 		<hr/>
@@ -47,6 +51,8 @@
 		</div>
 		<script>		
 			function decode(input){
+			var protogen = '';
+			var platform = '';
 				let result = {
 					generation:'Unknown',
 					platform:'Unknown',
@@ -55,38 +61,53 @@
 					cores:'Unknown',
 					cache:'Unknown',
 					stepping:'Unknown',
+					clock:'Clock Speed: N/A'
+					gen:'Generation: N/A',
+					power:'Power: N/A',
+					modelrev:'Model Revision: N/A',
+					sku:'SKU: N/A',
+					performance:'Performance: N/A'
 				};
 				
 				switch(input[0]){
 					case '1':
 						result.generation='Prototype Generation: Engineering sample 0';
+						protogen = 'ES';
 						break;
 					case '2':
 						result.generation='Prototype Generation: Engineering sample 1';
+						protogen = 'ES';
 						break;
 					case 'Y':
 						result.generation='Prototype Generation: Production Ryzen';
+						protogen = 'RY';
 						break;
 					case 'P':
 						result.generation='Prototype Generation: Production EPYC';
+						protogen = 'EP';
 						break;
 					case 'Z':
 						result.generation='Prototype Generation: Qualification Sample';
+						protogen = 'ES';
 						break;
 				}
 				
 				switch(input[1]){
 					case 'D':
 						result.platform='Platform: Desktop';
+						platform = 'D';
 						break;
 					case 'S':
 						result.platform='Platform: Server';
+						platform = 'S';
 						break;
 					case 'M':
 						result.platform='Platform: Mobile/Laptop';
+						platform = 'M';
 						break;
 					case 'E':
 						result.platform='Platform: Embedded';
+						platform = 'E';
 						break;
 				}
 				
@@ -234,7 +255,13 @@
 					case "FC": result.stepping='Stepping : Raven2(RV2)'; break;
 					case "G5": result.stepping='Stepping : ROME'; break;
 					case "FG": result.stepping='Stepping : PICASSO'; break;
-					case "H2": result.stepping='Stepping : Matisse'; break;
+					case "H2": result.stepping='Stepping : Matisse'; protogen = 'MA' break;
+				}
+				if(protogen=='ES')
+				{
+				var temp = input[2]+'.'+input[3]+input[4]+'Ghz';
+				result.clock = temp;
+				result.modelrev = 'Model Revision: '+input[5];
 				}
 				return result;
 			}
