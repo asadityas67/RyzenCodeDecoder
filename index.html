@@ -1,0 +1,217 @@
+<html>
+	<head>
+	</head>
+	<body>
+		<h1>Ryzen Decode</h1>
+		<p>Enter Code here (like 2S1404E2VJUG5_20/14_N), then click decode</p>
+		<input type='text' id='data'/>
+		<input type='button' onclick='render(document.getElementById("data").value);' value="Decode"/>
+		<hr/>
+		<div id='result'>
+		</div>
+		<script>		
+			function decode(input){
+				let result = {
+					generation:'Unknown',
+					platform:'Unknown',
+					tdp:'Unknown',
+					pkg:'Unknown',
+					cores:'Unknown',
+					cache:'Unknown',
+					stepping:'Unknown',
+				};
+				
+				switch(input[0]){
+					case '1':
+						result.generation='Prototype Generation: Engineering sample 0';
+						break;
+					case '2':
+						result.generation='Prototype Generation: Engineering sample 1';
+						break;
+					case 'Y':
+						result.generation='Prototype Generation: Production Ryzen';
+						break;
+					case 'P':
+						result.generation='Prototype Generation: Production EPYC';
+						break;
+					case 'Z':
+						result.generation='Prototype Generation: Qualification Sample';
+						break;
+				}
+				
+				switch(input[1]){
+					case 'D':
+						result.platform='Platform: Desktop';
+						break;
+					case 'S':
+						result.platform='Platform: Server';
+						break;
+					case 'M':
+						result.platform='Platform: Mobile/Laptop';
+						break;
+					case 'E':
+						result.platform='Platform: Embedded';
+						break;
+				}
+				
+				switch(input[6]+input[7]){
+					case 'A4':
+						result.tdp='TDP Config : Early 32C Naples';
+						break;
+					case 'A8':
+						result.tdp='TDP Config : 180W Threadripper';
+						break;
+					case 'A9':
+						result.tdp='TDP Config : non-X Threadripper (these exist?)';
+						break;
+					case 'AZ':
+						result.tdp='TDP Config : 250W Threadripper';
+						break;
+					case 'BA':
+					case 'A2':
+						result.tdp='TDP Config : 95W 8 core Zeppelin ES';
+						break;
+					case 'BB':
+					case 'AU':
+						result.tdp='TDP Config : 65W Zeppelin or Pinnacle or Matisse';
+						break;
+					case "AU": 
+						result.tdp='TDP Config : 65W Zeppelin or Pinnacle or Matisse'; 
+						break;
+					case "BC": 
+						result.tdp='TDP Config : 95W Zeppelin or Pinnacle"';
+						break;
+					case "BD": 
+						result.tdp='TDP Config : 180W Naples';
+						break;
+					case "BE": 
+						result.tdp='TDP Config : 155/170W Naples';
+						break;
+					case "BF": 
+						result.tdp='TDP Config : 120W Naples';
+						break;
+					case "BG": 
+						result.tdp='TDP Config : 105W Pinnacle or Matisse';
+						break;
+					case "BH": 
+						result.tdp='TDP Config : 45W Pinnacle - E Series'; 
+						break;
+					case "BI": 
+						result.tdp='TDP Config : 35W Zeppelin Embedded';
+						break;
+					case "BK": 
+						result.tdp='TDP Config : 45W Zeppelin Embedded'; 
+						break;
+					case "C3": 
+						result.tdp='TDP Config : 45W Raven Ridge H Series';
+						break;
+					case "C4": 
+						result.tdp='TDP Config : 15W Raven/Picasso - U series';
+						break;
+					case "C5": 
+						result.tdp='TDP Config : 65W Raven -G Series';
+						break;
+					case "C6":
+						result.tdp='TDP Config : 35W Raven -GE Series'; 
+						break;
+					case "E2":
+						result.tdp='TDP Config : Early 64C LP ROME';
+						break;
+				}
+				switch (input[8])
+				{
+					case 'M': 
+						result.pkg='Package : AM4 PGA1331';
+						break;
+					case 'V': 
+						result.pkg='Package : SP3 LGA4094 or TR4'; 
+						break;
+					case 'U': 
+						result.pkg='Package : SP3r2 LGA4094 or TR4'; 
+						break;
+					case 'R': 
+						result.pkg='Package : SP4r2 BGA2028'; 
+						break;
+					case 'T': 
+						result.pkg='FP5 BGA'; 
+						break;
+				}
+				switch (input[9])
+				{
+					case '2': 
+						result.cores='Physical Cores : 2'; 
+						break;
+					case '4': 
+						result.cores='Physical Cores : 4'; 
+						break;
+					case '6': 
+						result.cores='Physical Cores : 6'; 
+						break;
+					case '8': 
+						result.cores='Physical Cores : 8'; 
+						break;
+					case 'C': 
+						result.cores='Physical Cores : 12'; 
+						break;
+					case 'G': 
+						result.cores='Physical Cores : 16'; 
+						break;
+					case 'H': 
+						result.cores='Physical Cores : 24'; 
+						break;
+					case 'I': 
+						result.cores='Physical Cores : 32';
+						break;
+					case 'J': 
+						result.cores='Physical Cores : 64'; 
+						break;
+				}
+				switch (input[10])
+				{
+					case 'O': result.cache='Cache Config : 2x512 KB L2 + 4 MB L3'; break;
+					case 'M': result.cache='Cache Config : 4x512 KB L2 + 4 MB L3'; break;
+					case 'K': result.cache='Cache Config : 4x512 KB L2 + 8 MB L3'; break;
+					case 'G': result.cache='Cache Config : 4x512 KB L2 + 16 MB L3'; break;
+					case 'I': result.cache='Cache Config : 6x512 KB L2 + 16 MB L3'; break;
+					case '8': result.cache='Cache Config : 8x512 KB L2 + 16 MB L3 (Zeppelin SCM)'; break;
+					case 'Q': result.cache='Cache Config : 8x512 KB L2 + 16 MB L3 (WhiteHaven 2x MCM)'; break;
+					case 'S': result.cache='Cache Config : 8x512 KB L2 + 32 MB L3'; break;
+					case 'R': result.cache='Cache Config : 8x512 KB L2 + 64 MB L3'; break;
+					case '9': result.cache='Cache Config : 12x512 KB L2 + 32 MB L3'; break;
+					case 'W': result.cache='Cache Config : 12x512 KB L2 + 64 MB L3'; break;
+					case 'A': result.cache='Cache Config : 16x512 KB L2 + 32 MB L3'; break;
+					case 'P': result.cache='Cache Config : 16x512 KB L2 + 64 MB L3'; break;
+					case 'C': result.cache='Cache Config : 24x512 KB L2 + 64 MB L3'; break;
+					case 'H': result.cache='Cache Config : 32x512 KB L2 + 64 MB L3'; break;
+					case 'U': result.cache='Cache Config : 64x512 KB L2 + 256 MB L3'; break;
+				}
+				switch (input[11]+input[12])
+				{
+					case "E4": result.stepping='Stepping : A Zeppelin'; break;
+					case "AE": result.stepping='Stepping : B1 Zeppelin '; break;
+					case "F2": result.stepping='Stepping : B Raven1 (RV1)'; break;
+					case "AF": result.stepping='Stepping : B2 Zeppelin or pinnacle'; break;
+					case "F3":
+					case "F4": result.stepping='Stepping : B Zeppelin'; break;
+					case "FB": result.stepping='Stepping : B0 or B1 Raven1(RV1)'; break;
+					case "F6": result.stepping='Stepping : Fenghuang Raven'; break;
+					case "FC": result.stepping='Stepping : Raven2(RV2)'; break;
+					case "G5": result.stepping='Stepping : ROME'; break;
+					case "FG": result.stepping='Stepping : PICASSO'; break;
+					case "H2": result.stepping='Stepping : Matisse'; break;
+				}
+				return result;
+			}
+			
+			function render(input){
+				let result = decode(input);
+				let tmp = "";
+
+				for(var i in result){
+					tmp+=result[i]+"<br/>";
+				}
+				document.getElementById("result").innerHTML=tmp;
+			}
+		</script>
+	</body>
+</html>
