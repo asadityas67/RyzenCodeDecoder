@@ -39,9 +39,9 @@
     <div class="container">
       <section id="main_content">
         <h1>Ryzen Decode</h1>
-		<p>Ryzen Code Decoder v0.1</p>
+		<p>Ryzen Code Decoder v0.5</p>
 		<p>Made in accordance with HOW TO DECODE AMD CODENAMES V5.0 BY MARVIN(Marvin@moepc.net)</p>
-		</p>Program Written By Aditya Sharma u/asadityas67 or asadityas67@gmail.com</p>
+		<p>Program Written By Aditya Sharma u/asadityas67 or asadityas67@gmail.com</p>
 		<p>For Zen Based CPUs only, may not cover all CPUs</p>
 		<p>Enter Code here then click decode</p>
 		<input type='text' id='data'/>
@@ -51,8 +51,6 @@
 		</div>
 		<script>		
 			function decode(input){
-			var protogen = '';
-			var platform = '';
 				let result = {
 					generation:'Unknown',
 					platform:'Unknown',
@@ -61,53 +59,57 @@
 					cores:'Unknown',
 					cache:'Unknown',
 					stepping:'Unknown',
-					clock:'Clock Speed: N/A'
-					gen:'Generation: N/A',
-					power:'Power: N/A',
-					modelrev:'Model Revision: N/A',
-					sku:'SKU: N/A',
-					performance:'Performance: N/A'
+					generationc:'Unknown',
+					clockspd:'Unknown',
+					power:'Unknown',
+					modrev:'Unknown',
+					chiplet:'Unknown',
+					corecount:'Unknown',
+				};
+				let info = {
+				proto:'',
+				platform:'',
 				};
 				
 				switch(input[0]){
 					case '1':
 						result.generation='Prototype Generation: Engineering sample 0';
-						protogen = 'ES';
+						info.proto = 'ES';
 						break;
 					case '2':
 						result.generation='Prototype Generation: Engineering sample 1';
-						protogen = 'ES';
+						info.proto = 'ES';
 						break;
 					case 'Y':
 						result.generation='Prototype Generation: Production Ryzen';
-						protogen = 'RY';
+						info.proto = 'RY';
 						break;
 					case 'P':
 						result.generation='Prototype Generation: Production EPYC';
-						protogen = 'EP';
+						info.proto = 'EP';
 						break;
 					case 'Z':
 						result.generation='Prototype Generation: Qualification Sample';
-						protogen = 'ES';
+						info.proto = 'ES';
 						break;
 				}
 				
 				switch(input[1]){
 					case 'D':
 						result.platform='Platform: Desktop';
-						platform = 'D';
+						info.platform = 'D';
 						break;
 					case 'S':
 						result.platform='Platform: Server';
-						platform = 'S';
+						info.platform = 'S';
 						break;
 					case 'M':
 						result.platform='Platform: Mobile/Laptop';
-						platform = 'M';
+						info.platform = 'M';
 						break;
 					case 'E':
 						result.platform='Platform: Embedded';
-						platform = 'E';
+						info.platform = 'E';
 						break;
 				}
 				
@@ -148,7 +150,7 @@
 						result.tdp='TDP Config : 120W Naples';
 						break;
 					case "BG": 
-						result.tdp='TDP Config : 105W Pinnacle or Matisse';
+						result.tdp='TDP Config : 105W Pinnacle or Matisse or 55W EPYC Embedded';
 						break;
 					case "BH": 
 						result.tdp='TDP Config : 45W Pinnacle - E Series'; 
@@ -255,13 +257,48 @@
 					case "FC": result.stepping='Stepping : Raven2(RV2)'; break;
 					case "G5": result.stepping='Stepping : ROME'; break;
 					case "FG": result.stepping='Stepping : PICASSO'; break;
-					case "H2": result.stepping='Stepping : Matisse'; protogen = 'MA' break;
+					case "H2": result.stepping='Stepping : Matisse'; info.proto = 'MA'; break;
 				}
-				if(protogen=='ES')
+
+				if(info.proto === 'ES')
 				{
-				var temp = input[2]+'.'+input[3]+input[4]+'Ghz';
-				result.clock = temp;
-				result.modelrev = 'Model Revision: '+input[5];
+				result.clockspd = 'Clock Speed: '+input[2]+'.'+input[3]+input[4]+' Ghz';
+				result.modrev = 'Model Revision: '+input[5];
+				}
+				if(info.proto === 'RY')
+				{
+				result.generationc = 'Generation: '+input[2];
+				if(input[3]===0||input[3]===2||input[3]===3)
+				{
+				result.clockspd = 'Performance: Mainstream';
+				}
+				if(input[3]===4||input[3]===5||input[3]===6)
+				{
+				result.clockspd = 'Performance: High Performance';
+				}
+				if(input[3]===7||input[3]===8||input[3]===9)
+				{
+				result.clockspd = 'Performance: Enthusiast';
+				}
+				}
+				if(info.proto === 'EP')
+				{
+				result.generationc = 'Series: '+input[2]+'000';
+				result.clockspd = 'Performance level (1-6): '+input[3];
+				if(input[5]===1)
+				{
+				result.power = 'Socket Config : 2 Sockets';
+				}
+				else
+				{
+				result.power = 'Socket Config : 1 Socket';
+				}
+				}
+				if(info.proto === 'MA')
+				{
+				result.modrev = 'Model Revision: '+input[2];
+				result.chiplet = 'No. Of chiplets: '+input[3];
+				result.corecount = 'Core Count: '+input[4]+input[5];
 				}
 				return result;
 			}
