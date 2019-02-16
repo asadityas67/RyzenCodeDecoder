@@ -90,6 +90,10 @@
 						result.generation='Prototype Generation: Production EPYC';
 						info.proto = 'EP';
 						break;
+					case 'D':
+						result.generation='Prototype Generation: Production Semi Custom';
+						info.proto = 'RY';
+						break;
 					case 'Z':
 						result.generation='Prototype Generation: Qualification Sample';
 						info.proto = 'ES';
@@ -121,6 +125,9 @@
 				switch(input[6]+input[7]){
 					case 'A4':
 						result.tdp='TDP Config : Early 32C Naples';
+						break;
+					case 'TB':
+						result.tdp='TDP Config : Subor Console';
 						break;
 					case 'A8':
 						result.tdp='TDP Config : 180W Threadripper';
@@ -200,6 +207,7 @@
 						result.pkg='FP5 BGA'; 
 						break;
 					case 'E':
+					case 'P':
 						result.pkg='Custom BGA';
 						break;
 				}
@@ -261,6 +269,7 @@
 					case "F3":
 					case "F4": result.stepping='Stepping : B Zeppelin'; break;
 					case "FB": result.stepping='Stepping : B0 or B1 Raven1(RV1)'; break;
+					case "FA":
 					case "F6": result.stepping='Stepping : Fenghuang Raven'; break;
 					case "FC": result.stepping='Stepping : Raven2(RV2)'; break;
 					case "G5": result.stepping='Stepping : ROME'; break;
