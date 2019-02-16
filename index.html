@@ -113,6 +113,9 @@
 						result.platform='Platform: Embedded';
 						info.platform = 'E';
 						break;
+					case 'G':
+						result.platform='Platform: Game Console';
+						info.platform = 'G';
 				}
 				
 				switch(input[6]+input[7]){
@@ -196,6 +199,9 @@
 					case 'T': 
 						result.pkg='FP5 BGA'; 
 						break;
+					case 'E':
+						result.pkg='Custom BGA';
+						break;
 				}
 				switch (input[9])
 				{
@@ -260,6 +266,7 @@
 					case "G5": result.stepping='Stepping : ROME'; break;
 					case "FG": result.stepping='Stepping : PICASSO'; break;
 					case "H2": result.stepping='Stepping : Matisse'; info.proto = 'MA'; break;
+					case "A2": result.stepping='Stepping : Matisse (console)'; break;
 				}
 
 				if(info.proto === 'ES')
